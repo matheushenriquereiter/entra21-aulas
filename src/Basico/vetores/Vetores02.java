@@ -1,7 +1,5 @@
 package Basico.vetores;
 
-import java.util.Scanner;
-
 public class Vetores02 {
     public static void main(String[] args) {
         // Inicialização padrão
