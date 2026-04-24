@@ -7,7 +7,9 @@ public class Carro {
     int ano;
     Pessoa dono;
 
-    void ligar() {
+    public void ligar() {
+//        dono.apresentar();
+
         if (dono == null) {
             System.out.println("Carro sem dono");
             return;
