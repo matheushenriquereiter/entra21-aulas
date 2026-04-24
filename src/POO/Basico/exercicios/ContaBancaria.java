@@ -12,22 +12,34 @@ public class ContaBancaria {
     }
 
     public ContaBancaria(Pessoa titular, double saldo) {
+        if (saldo < 0) {
+            this.saldo = 0;
+        } else {
+            this.saldo = saldo;
+        }
+
         this.titular = titular;
-        this.saldo = saldo;
     }
 
-    public void depositar(double valor) {
+    public String depositar(double valor) {
+        if (valor <= 0) {
+            return "Valor de deposito inválido...";
+        }
+
         this.saldo += valor;
-        System.out.printf("Valor depositado! Saldo atual: R$%.2f%n", this.saldo);
+        return "Valor depositado! Saldo atual: R$%.2f".formatted(this.saldo);
     }
 
-    public void sacar(double valor) {
+    public String sacar(double valor) {
+        if (valor <= 0) {
+            return "Valor de saque inválido...";
+        }
+
         if (valor > saldo) {
-            System.out.println("saldo insuficiente...");
-            return;
+            return "saldo insuficiente...";
         }
 
         this.saldo -= valor;
-        System.out.printf("Valor sacado! Saldo atual: R$%.2f%n", this.saldo);
+        return "Valor sacado! Saldo atual: R$%.2f".formatted(this.saldo);
     }
 }

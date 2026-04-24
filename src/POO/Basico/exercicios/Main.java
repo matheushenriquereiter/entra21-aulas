@@ -13,11 +13,9 @@ public class Main {
         Pessoa titular = new Pessoa("Jorge", 22, 60);
         ContaBancaria contaBancaria = new ContaBancaria(titular, 200);
 
-        System.out.println(contaBancaria.saldo);
-
-        contaBancaria.sacar(200);
-        contaBancaria.depositar(100);
-        contaBancaria.sacar(100);
-        contaBancaria.sacar(100);
+        System.out.println(contaBancaria.sacar(200));
+        System.out.println(contaBancaria.depositar(100));
+        System.out.println(contaBancaria.sacar(100));
+        System.out.println(contaBancaria.sacar(100));
     }
 }
