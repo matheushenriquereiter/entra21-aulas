@@ -6,7 +6,7 @@ public class Principal {
         Estudante estudante2 = new Estudante("2", 2);
 
         estudante1.adicionarNota(0, 10);
-        estudante2.adicionarNota(1, 10);
+        estudante1.adicionarNota(1, 10);
         System.out.println(estudante1.calcularMedia());
     }
 }
