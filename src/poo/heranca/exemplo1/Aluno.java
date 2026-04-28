@@ -1,4 +1,4 @@
-package poo.heranca;
+package poo.heranca.exemplo1;
 
 public class Aluno extends Pessoa {
     private String matricula;
