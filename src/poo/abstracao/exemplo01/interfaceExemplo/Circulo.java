@@ -1,6 +1,6 @@
-package poo.abstracao.exemplo01.classeAbstrata;
+package poo.abstracao.exemplo01.interfaceExemplo;
 
-public class Circulo extends FormaGeometricaAbstract {
+public class Circulo implements IFormaGeometrica {
     private double raio;
 
     public Circulo(double raio) {

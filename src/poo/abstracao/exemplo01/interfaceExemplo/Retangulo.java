@@ -1,6 +1,8 @@
-package poo.abstracao.exemplo01.classeAbstrata;
+package poo.abstracao.exemplo01.interfaceExemplo;
 
-public class Retangulo extends FormaGeometricaAbstract {
+import poo.abstracao.exemplo01.classeAbstrata.FormaGeometricaAbstract;
+
+public class Retangulo implements IFormaGeometrica {
     private  double altura;
     private double largura;
 
