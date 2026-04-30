@@ -1,6 +1,6 @@
 package poo.basico.exercicios;
 
-import poo.basico.exemplo1.Pessoa;
+import poo.basico.exemplo01.Pessoa;
 
 public class Main {
     public static void main(String[] args) {
