@@ -7,64 +7,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BancoPedido {
-    private static List<Item> itens = new ArrayList<>();
-
+    private List<Item> itens = new ArrayList<>();
     private BancoProdutosDisponiveis bancoProdutosDisponiveis;
 
     public BancoPedido(BancoProdutosDisponiveis bancoProdutosDisponiveis) {
         this.bancoProdutosDisponiveis = bancoProdutosDisponiveis;
     }
 
-    public void adicionar(Item item) {
-        itens.add(item);
-
-        System.out.println("Item '" + item.getProduto().getNome() + "' adicionado com sucesso!");
-    }
-
-    public List<Item> getItens() {
-        return itens;
-    }
-
     public void adicionarItem(int idProduto, int quantidade) {
-        boolean produtoEncontrado = false;
+        Produto produtoDisponivel = bancoProdutosDisponiveis.obterPorId(idProduto);
 
-        for (Produto produtoDisponivel : bancoProdutosDisponiveis.getProdutosDisponiveis()) {
-            if (produtoDisponivel.getId() == idProduto) {
-                itens.add(new Item(produtoDisponivel, quantidade));
-                System.out.println("Item adicionado ao pedido!");
-                produtoEncontrado = true;
-                break;
-            }
-        }
-
-        if (!produtoEncontrado) {
+        if (produtoDisponivel == null) {
             System.out.println("Produto com ID " + idProduto + " não encontrado.");
+            return;
         }
+
+        itens.add(new Item(produtoDisponivel, quantidade));
+        System.out.println("Item adicionado ao pedido!");
     }
 
-    public void exibirPedidoAtual() {
+    public void exibirPedido() {
         System.out.println("\n--- Itens no Pedido ---");
 
-        if (getItens().isEmpty()) {
+        if (itens.isEmpty()) {
             System.out.println("Nenhum item no pedido.");
             return;
         }
 
-        for (Item item : getItens()) {
-            Produto produto = item.getProduto();
-            int quantidade = item.getQuantidade();
-            String nomeProduto = "Desconhecido";
-            double precoProduto = 0.00d;
-
-            for (Produto produtoDisponivel : bancoProdutosDisponiveis.getProdutosDisponiveis()) {
-                if (produtoDisponivel.getId() == produto.getId()) {
-                    nomeProduto = produtoDisponivel.getNome();
-                    precoProduto = produtoDisponivel.getPreco();
-                    break;
-                }
-            }
-
-            System.out.println("Produto: " + nomeProduto + " (ID: " + produto.getId() + ") | Quantidade: " + quantidade + " | Preço Unitário: R$" + precoProduto);
+        for (Item item : itens) {
+            System.out.println("Produto: " + item.getProduto().getNome() + " (ID: " + item.getProduto().getId() + ") | Quantidade: " + item.getQuantidade() + " | Preço Unitário: R$" + item.getProduto().getPreco());
         }
     }
 
@@ -72,33 +43,21 @@ public class BancoPedido {
         System.out.println("\n--- Resumo do Pedido ---");
 
         double totalGeral = 0;
-        if (getItens().isEmpty()) {
+        if (itens.isEmpty()) {
             System.out.println("Nenhum item no pedido para finalizar.");
             return;
         }
 
-        for (Item item : getItens()) {
-            Produto produto = item.getProduto();
-            int quantidade = item.getQuantidade();
-            double precoUnitario = 0;
-            String nomeProduto = "Desconhecido";
+        for (Item item : itens) {
+            double subtotal = item.getProduto().getPreco() * item.getQuantidade();
 
-            for (Produto produtoDisponivel : bancoProdutosDisponiveis.getProdutosDisponiveis()) {
-                if (produtoDisponivel.getId() == produto.getId()) {
-                    precoUnitario = produto.getPreco();
-                    nomeProduto = produto.getNome();
-                    break;
-                }
-            }
-
-            double subtotal = precoUnitario * quantidade;
-            System.out.println(" " + nomeProduto + " x " + quantidade + " = R$" + String.format("%.2f", subtotal));
+            System.out.println(" " + item.getProduto().getNome() + " x " + item.getQuantidade() + " = R$" + String.format("%.2f", subtotal));
             totalGeral += subtotal;
         }
 
         System.out.println("------------------------");
         System.out.println("Total do Pedido: R$" + String.format("%.2f", totalGeral));
-        getItens().clear();
+        itens.clear();
         System.out.println("Pedido finalizado!");
     }
 }

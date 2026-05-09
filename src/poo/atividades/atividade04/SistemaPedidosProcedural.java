@@ -38,7 +38,7 @@ public class SistemaPedidosProcedural {
                     bancoPedido.adicionarItem(Integer.parseInt(idProduto), Integer.parseInt(quantidade));
                     break;
                 case 2:
-                    bancoPedido.exibirPedidoAtual();
+                    bancoPedido.exibirPedido();
                     break;
                 case 3:
                     bancoPedido.finalizarPedido();

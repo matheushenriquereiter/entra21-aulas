@@ -14,7 +14,13 @@ public class BancoProdutosDisponiveis {
         System.out.println("Produto '" + produtoDisponivel.getNome() + "' adicionado com sucesso!");
     }
 
-    public List<Produto> getProdutosDisponiveis() {
-        return produtosDisponiveis;
+    public Produto obterPorId(int idProduto) {
+        for (Produto produtoDisponivel : produtosDisponiveis) {
+            if (produtoDisponivel.getId() == idProduto) {
+                return produtoDisponivel;
+            }
+        }
+
+        return null;
     }
 }
