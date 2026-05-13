@@ -3,6 +3,7 @@ package poo.atividades.atividade04;
 import poo.atividades.atividade04.bancos.BancoPedido;
 import poo.atividades.atividade04.bancos.BancoProdutosDisponiveis;
 import poo.atividades.atividade04.entidades.Produto;
+import poo.atividades.atividade04.util.Leitor;
 
 import java.util.Scanner;
 
@@ -35,8 +36,8 @@ public class SistemaPedidosProcedural {
             scanner.nextLine();
             switch (opcao) {
                 case 1:
-                    int idProduto = lerInteiro(scanner, "ID do Produto: ", "ID inválido. Tente novamente.");
-                    int quantidade = lerInteiro(scanner, "Quantidade: ", "Quantidade inválida. Tente novamente.");
+                    int idProduto = Leitor.lerInteiro(scanner, "ID do Produto: ", "ID inválido. Tente novamente.");
+                    int quantidade = Leitor.lerInteiro(scanner, "Quantidade: ", "Quantidade inválida. Tente novamente.");
 
                     bancoPedido.adicionarItem(idProduto, quantidade);
                     break;
@@ -50,18 +51,5 @@ public class SistemaPedidosProcedural {
         } while (opcao != 0);
 
         scanner.close();
-    }
-
-    public static int lerInteiro(Scanner scanner, String message, String errorMessage) {
-        while (true) {
-            System.out.println(message);
-            String texto = scanner.nextLine();
-
-            try {
-                return Integer.parseInt(texto);
-            } catch (NumberFormatException error) {
-                System.out.println(errorMessage);
-            }
-        }
     }
 }
