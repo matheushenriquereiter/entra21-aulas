@@ -26,16 +26,19 @@ public class SistemaPedidosProcedural {
             System.out.print("Opção: ");
 
             opcao = scanner.nextInt();
+
+            if (opcao < 0 || opcao > 3) {
+                System.out.println("Opção inválida. Tente novamente.");
+                continue;
+            }
+
             scanner.nextLine();
             switch (opcao) {
                 case 1:
-                    System.out.print("ID do Produto: ");
-                    String idProduto = scanner.nextLine();
+                    int idProduto = lerInteiro(scanner, "ID do Produto: ", "ID inválido. Tente novamente.");
+                    int quantidade = lerInteiro(scanner, "Quantidade: ", "Quantidade inválida. Tente novamente.");
 
-                    System.out.print("Quantidade: ");
-                    String quantidade = scanner.nextLine();
-
-                    bancoPedido.adicionarItem(Integer.parseInt(idProduto), Integer.parseInt(quantidade));
+                    bancoPedido.adicionarItem(idProduto, quantidade);
                     break;
                 case 2:
                     bancoPedido.exibirPedido();
@@ -47,5 +50,18 @@ public class SistemaPedidosProcedural {
         } while (opcao != 0);
 
         scanner.close();
+    }
+
+    public static int lerInteiro(Scanner scanner, String message, String errorMessage) {
+        while (true) {
+            System.out.println(message);
+            String texto = scanner.nextLine();
+
+            try {
+                return Integer.parseInt(texto);
+            } catch (NumberFormatException error) {
+                System.out.println(errorMessage);
+            }
+        }
     }
 }
